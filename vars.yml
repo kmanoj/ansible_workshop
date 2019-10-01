@@ -1,9 +1,3 @@
-############################################
-#  ANSIBLE Variable for cDOT 		   #
-#   					   #	
-#  Set the cDOT environment details   	   #
-#  Author: Siva Murugesan 		   #
-############################################
 netapp_hostname: cluster1
 netapp_hostname_dest: cluster2
 netapp_username: admin
