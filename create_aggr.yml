@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  name: create_aggregate
+  vars_files:
+    vars.yml
+  tasks:
+    - name: Create aggregate
+      na_ontap_aggregate:
+        state: present
+        service_state: online
+        name: "{{ aggrname2 }}"
+        nodes: "{{ node_name_02 }}"
+        disk_count: 10
+        raid_size: 10
+        wait_for_online: true
+        hostname: "{{ netapp_hostname }}"
+        username: "{{ netapp_username }}"
+        password: "{{ netapp_password }}"
