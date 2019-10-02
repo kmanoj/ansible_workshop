@@ -4,7 +4,7 @@
   vars_files:
    vars.yml
   vars:
-    login: &login
+    defaults: &defaults
       hostname: "{{ netapp_hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
@@ -19,7 +19,7 @@
       root_volume: "{{ vserver}}_root"
       root_volume_aggregate: "{{ aggrname }}"
       root_volume_security_style: unix
-      <<: *login
+      <<: *defaults
   - name: Create interface NFS
     na_ontap_interface:
       state: present
@@ -35,7 +35,7 @@
       address: "{{ address_nfs }}"
       netmask: 255.255.255.0
       vserver: "{{ vserver }}"
-      <<: *login
+      <<: *defaults
   - name: Create interface CIFS
     na_ontap_interface:
       state: present
@@ -51,20 +51,20 @@
       address: "{{ address_cifs }}"
       netmask: 255.255.255.0
       vserver: "{{ vserver }}"
-      <<: *login 
+      <<: *defaults 
   - name: Create NTP server
     na_ontap_ntp:
       state: present
       version: auto
       server_name: "{{ ntp_server }}"
-      <<: *login
+      <<: *defaults
   - name: create DNS
     na_ontap_dns:
      state: present
      vserver:  "{{ vserver }}"
      domains: "{{ domain }}"
      nameservers: "{{ dns }}"
-     <<: *login 
+     <<: *defaults 
   - name: Create interface ISCSI
     na_ontap_interface:
       state: present
@@ -78,7 +78,7 @@
       address: "{{ address_iscsi }}"
       netmask: 255.255.255.0
       vserver: "{{ vserver }}"
-      <<: *login
+      <<: *defaults
   - name: change nfs status
     na_ontap_nfs:
       state: present
@@ -90,13 +90,13 @@
       tcp: enabled
       udp: enabled
       vstorage_state: disabled
-      <<: *login
+      <<: *defaults
   - name: change ISCSI status
     na_ontap_iscsi:
       state: present
       service_state: started
       vserver: "{{ vserver }}"
-      <<: *login  
+      <<: *defaults  
   - name: Create cifs_server
     na_ontap_cifs_server:
       state: present
@@ -118,4 +118,4 @@
       ro_rule: any
       rw_rule: none
       super_user_security: none
-      <<: *login
+      <<: *defaults
