@@ -8,8 +8,8 @@
       na_ontap_aggregate:
         state: present
         service_state: online
-        name: "{{ aggrname2 }}"
-        nodes: "{{ node_name_02 }}"
+        name: "{{ aggrname }}"
+        nodes: "{{ node_name_01 }}"
         disk_count: 10
         raid_size: 10
         wait_for_online: true
