@@ -116,6 +116,6 @@
       vserver: "{{ vserver }}"
       client_match: 0.0.0.0/0
       ro_rule: any
-      rw_rule: none
-      super_user_security: none
+      rw_rule: sys
+      super_user_security: sys
       <<: *defaults
